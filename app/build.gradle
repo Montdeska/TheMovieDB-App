@@ -21,7 +21,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API", "\"https://api.themoviedb.org/3/\"")
-            buildConfigField("String", "TOKEN", System.getenv("TMDB_TOKEN"))
+            buildConfigField("String", "TOKEN","\"${System.getenv("TMDB_TOKEN")}\"")
+        }
+        debug {
+            buildConfigField("String", "API", "\"https://api.themoviedb.org/3/\"")
+            buildConfigField("String", "TOKEN","\"${System.getenv("TMDB_TOKEN")}\"")
         }
     }
 }
