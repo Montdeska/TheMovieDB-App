@@ -8,7 +8,7 @@ interface MoviesContract {
     interface View {
         fun showPopular(movies: List<Movie>)
         fun showUpcoming(movies: List<Movie>)
-        fun shoLatest(movies: List<Movie>)
+        fun showLatest(movie: Movie)
         fun showError(message: String?)
     }
 
@@ -22,7 +22,7 @@ interface MoviesContract {
 
     interface Model {
         suspend fun getPopularData(): Movies
-        suspend fun getUpcomingData()
-        suspend fun getLatestData()
+        suspend fun getUpcomingData(): Movies
+        suspend fun getLatestData(): Movie
     }
 }
