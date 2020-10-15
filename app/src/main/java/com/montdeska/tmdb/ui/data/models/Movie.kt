@@ -1,6 +1,26 @@
 package com.montdeska.tmdb.ui.data.models
 
 data class Movie(
-    val _id: Int,
-    val name: String
+    val id: Int,
+    val title: String,
+    val popularity: Double,
+    val budget: Double,
+    val vote_count: Int,
+    val video: Boolean,
+    val poster_path: String,
+    val adult: Boolean,
+    val backdrop_path: String,
+    val original_language: String,
+    val original_title: String,
+    val genre_ids: List<Int>,
+    val vote_average: Float,
+    val overview: String,
+    val release_date: String,
+    val homepage: String,
+    val imdb_id: String,
+    val status: String,
+    val tagline: String,
+    val production_companies: List<String>,
+    val production_countries: List<String>,
+    val revenue: Double,
 )
