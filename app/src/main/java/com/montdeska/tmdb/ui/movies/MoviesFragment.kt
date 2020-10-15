@@ -1,6 +1,7 @@
 package com.montdeska.tmdb.ui.movies
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,21 +9,13 @@ import android.view.ViewGroup
 import com.montdeska.tmdb.R
 import com.montdeska.tmdb.ui.data.models.Movie
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MoviesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MoviesFragment : Fragment(), MoviesContract.View {
 
     private lateinit var presenter: MoviesPresenter
 
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -43,15 +36,6 @@ class MoviesFragment : Fragment(), MoviesContract.View {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MoviesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             MoviesFragment().apply {
@@ -65,11 +49,10 @@ class MoviesFragment : Fragment(), MoviesContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter = MoviesPresenter(this)
-
+        presenter.getPopular()
     }
 
     override fun showPopular(movies: List<Movie>) {
-
     }
 
     override fun showUpcoming(movies: List<Movie>) {
