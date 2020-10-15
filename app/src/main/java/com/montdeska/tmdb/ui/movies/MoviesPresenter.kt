@@ -1,40 +1,48 @@
 package com.montdeska.tmdb.ui.movies
 
-import com.montdeska.tmdb.BuildConfig
+import com.montdeska.tmdb.ui.data.models.Movies
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class MoviesPresenter(var view: MoviesContract.View) : CoroutineScope, MoviesContract.Presenter {
+class MoviesPresenter(
+    private var view: MoviesContract.View,
+    private var model: MoviesContract.Model,
+    private val dispatcher: CoroutineDispatcher
+) :
+    CoroutineScope, MoviesContract.Presenter {
 
     private val job = Job()
+    var _list: Movies? = null
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.IO
-
-    private var headers = HashMap<String, String>()
-    private var model: MoviesModel
-
-    init {
-        headers["Authorization"] = "Bearer " + BuildConfig.TOKEN
-        model = MoviesModel(headers)
-    }
+        get() = job + dispatcher
 
     override fun getPopular() {
         launch {
-            val list = model.getPopularData()
-            if (list.results.isNotEmpty()) {
-                view.showPopular(list.results)
+            _list = model.getPopularData()
+            if (_list!!.results.isNotEmpty()) {
+                view.showPopular(_list!!.results)
             } else {
-                view.showError("No pudimos obtener las películas populares.")
+                view.showError("We couldn't get the popular movies")
             }
         }
     }
 
     override fun getUpcoming() {
-
+        launch {
+            _list = model.getUpcomingData()
+            if (_list!!.results.isNotEmpty()) {
+                view.showUpcoming(_list!!.results)
+            } else {
+                view.showError("We couldn't get the upcoming movies")
+            }
+        }
     }
 
     override fun getLatest() {
-
+        launch {
+            val movie = model.getLatestData()
+            view.showLatest(movie)
+        }
     }
 
     override fun detachView() {
