@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.montdeska.tmdb.BuildConfig
 import com.montdeska.tmdb.R
 import com.montdeska.tmdb.ui.data.models.Movie
+import kotlinx.coroutines.Dispatchers
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -48,7 +50,9 @@ class MoviesFragment : Fragment(), MoviesContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = MoviesPresenter(this)
+        val headers = HashMap<String, String>()
+        headers["Authorization"] = "Bearer " + BuildConfig.TOKEN
+        presenter = MoviesPresenter(this, MoviesModel(headers), Dispatchers.IO)
         presenter.getPopular()
     }
 
@@ -56,11 +60,9 @@ class MoviesFragment : Fragment(), MoviesContract.View {
     }
 
     override fun showUpcoming(movies: List<Movie>) {
-
     }
 
-    override fun shoLatest(movies: List<Movie>) {
-
+    override fun showLatest(movie: Movie) {
     }
 
     override fun showError(message: String?) {
