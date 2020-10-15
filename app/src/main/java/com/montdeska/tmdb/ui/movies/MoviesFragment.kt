@@ -62,4 +62,7 @@ class MoviesFragment : Fragment(), MoviesContract.View {
     override fun shoLatest(movies: List<Movie>) {
 
     }
+
+    override fun showError(message: String?) {
+    }
 }
