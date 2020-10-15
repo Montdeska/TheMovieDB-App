@@ -1,29 +1,31 @@
 package com.montdeska.tmdb.ui.movies
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.montdeska.tmdb.BuildConfig
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class MoviesPresenter(var view: MoviesContract.View) : ViewModel(), MoviesContract.Presenter {
+class MoviesPresenter(var view: MoviesContract.View) : CoroutineScope, MoviesContract.Presenter {
 
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.IO
 
     private var headers = HashMap<String, String>()
-    private lateinit var model: MoviesModel
+    private var model: MoviesModel
 
     init {
-        headers.put("Authorization", BuildConfig.TOKEN)
-        MoviesModel(headers)
+        headers["Authorization"] = "Bearer " + BuildConfig.TOKEN
+        model = MoviesModel(headers)
     }
 
-    private val _movieslist = MutableLiveData<String>()
-    val moviesList: LiveData<String> get() = _movieslist
-
     override fun getPopular() {
-        viewModelScope.launch {
-            model.getPopularData()
+        launch {
+            val list = model.getPopularData()
+            if (list.results.isNotEmpty()) {
+                view.showPopular(list.results)
+            } else {
+                view.showError("No pudimos obtener las películas populares.")
+            }
         }
     }
 
@@ -33,6 +35,10 @@ class MoviesPresenter(var view: MoviesContract.View) : ViewModel(), MoviesContra
 
     override fun getLatest() {
 
+    }
+
+    override fun detachView() {
+        job.cancel()
     }
 
 
