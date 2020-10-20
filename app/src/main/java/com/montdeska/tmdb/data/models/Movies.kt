@@ -1,4 +1,4 @@
-package com.montdeska.tmdb.ui.data.models
+package com.montdeska.tmdb.data.models
 
 data class Movies(
     val results: List<Movie>

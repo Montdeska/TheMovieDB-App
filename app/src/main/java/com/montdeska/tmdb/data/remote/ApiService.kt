@@ -1,8 +1,8 @@
-package com.montdeska.tmdb.ui.data.remote
+package com.montdeska.tmdb.data.remote
 
 import com.montdeska.tmdb.BuildConfig
-import com.montdeska.tmdb.ui.data.models.Movie
-import com.montdeska.tmdb.ui.data.models.Movies
+import com.montdeska.tmdb.data.models.Movie
+import com.montdeska.tmdb.data.models.Movies
 import com.squareup.moshi.*
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

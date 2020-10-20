@@ -1,8 +1,8 @@
 package com.montdeska.tmdb.ui.movies
 
-import com.montdeska.tmdb.ui.data.models.Movie
-import com.montdeska.tmdb.ui.data.models.Movies
-import com.montdeska.tmdb.ui.data.remote.Api
+import com.montdeska.tmdb.data.models.Movie
+import com.montdeska.tmdb.data.models.Movies
+import com.montdeska.tmdb.data.remote.Api
 
 class MoviesModel(private val headers: HashMap<String, String>) : MoviesContract.Model {
 

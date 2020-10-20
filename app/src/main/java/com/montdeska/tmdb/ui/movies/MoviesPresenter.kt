@@ -1,6 +1,6 @@
 package com.montdeska.tmdb.ui.movies
 
-import com.montdeska.tmdb.ui.data.models.Movies
+import com.montdeska.tmdb.data.models.Movies
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -12,17 +12,18 @@ class MoviesPresenter(
     CoroutineScope, MoviesContract.Presenter {
 
     private val job = Job()
-    var _list: Movies? = null
-    override val coroutineContext: CoroutineContext
-        get() = job + dispatcher
+    private var _list: Movies? = null
+    override val coroutineContext: CoroutineContext get() = job + dispatcher
 
     override fun getPopular() {
         launch {
             _list = model.getPopularData()
-            if (_list!!.results.isNotEmpty()) {
-                view.showPopular(_list!!.results)
-            } else {
-                view.showError("We couldn't get the popular movies")
+            withContext(MainScope().coroutineContext) {
+                if (_list!!.results.isNotEmpty()) {
+                    view.showPopular(_list!!.results)
+                } else {
+                    view.showError("We couldn't get the popular movies")
+                }
             }
         }
     }

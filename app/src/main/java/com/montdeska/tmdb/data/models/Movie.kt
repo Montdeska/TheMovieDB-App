@@ -1,4 +1,4 @@
-package com.montdeska.tmdb.ui.data.models
+package com.montdeska.tmdb.data.models
 
 data class Movie(
     val id: Int,
@@ -20,7 +20,5 @@ data class Movie(
     val imdb_id: String? = null,
     val status: String? = null,
     val tagline: String? = null,
-    val production_companies: List<String>? = null,
-    val production_countries: List<String>? = null,
     val revenue: Double? = null
 )

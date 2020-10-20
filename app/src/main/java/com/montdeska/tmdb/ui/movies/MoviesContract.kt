@@ -1,7 +1,7 @@
 package com.montdeska.tmdb.ui.movies
 
-import com.montdeska.tmdb.ui.data.models.Movie
-import com.montdeska.tmdb.ui.data.models.Movies
+import com.montdeska.tmdb.data.models.Movie
+import com.montdeska.tmdb.data.models.Movies
 
 interface MoviesContract {
 

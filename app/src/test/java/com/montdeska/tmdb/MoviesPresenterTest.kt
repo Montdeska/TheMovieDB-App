@@ -1,8 +1,7 @@
 package com.montdeska.tmdb
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.montdeska.tmdb.ui.data.models.Movie
-import com.montdeska.tmdb.ui.data.models.Movies
+import com.montdeska.tmdb.data.models.Movie
+import com.montdeska.tmdb.data.models.Movies
 import com.montdeska.tmdb.ui.movies.MoviesContract
 import com.montdeska.tmdb.ui.movies.MoviesFragment
 import com.montdeska.tmdb.ui.movies.MoviesModel
